@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HTML Form Validation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            border: 2px solid black;
+            padding: 50px;
+            margin: 100px auto;
+            width: fit-content;
+            text-align: right;
+        }
+
+        form input {
+            height: 30px;
+            width: 300px;
+            margin: 10px;
+            border: 1px solid gray;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        .button {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button button {
+            padding: 8px 30px;
+            border: none;
+            color: white;
+            background: crimson;
+        }
+
+        .err {
+            background: #ffe6ee;
+            border: 1px solid #b1395f;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .errorMessage {
+            color: #c12020;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" name="form" onsubmit="return validate()" novalidate>
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <!-- Error message div -->
+        <div class="errorMessage" id="errorName"></div>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <!-- Error message div -->
+        <div class="errorMessage" id="errorEmail"></div>
+        <div>
+            <label for="phone">Phone Number: </label>
+            <input type="number" name="phone" id="phone" required>
+        </div>
+        <!-- Error message div -->
+        <div class="errorMessage" id="errorPhone"></div>
+        <div>
+            <label for="password">Password: </label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <!-- Error message div -->
+        <div class="errorMessage" id="errorPassword"></div>
+        <div class="button">
+            <button>Submit</button>
+        </div>
+    </form>
+
+    <!-- JavaScript for Form Validation -->
+    <script>
+        function validate() {
+            var valid = true, error = "", field = "";
+
+            //for name
+            field = document.getElementById("name");
+            error = document.getElementById("errorName");
+            var name = document.forms['form']['name'].value;
+            if (!field.checkValidity() || name.length < 3) {
+                valid = false;
+                field.classList.add("err");
+                if (!field.checkValidity()) {
+                    error.innerHTML = "Please Enter your Name!\r\n";
+                }
+                else if (name.length < 3) {
+                    error.innerHTML = "Name must be of minimum 3 characters!\r\n";
+                }
+            }
+            else {
+                field.classList.remove("err");
+                error.innerHTML = "";
+            }
+
+
+            //for email
+            field = document.getElementById("email");
+            error = document.getElementById("errorEmail");
+            if (!field.checkValidity()) {
+                valid = false;
+                field.classList.add("err");
+                error.innerHTML = "Invalid Email!\r\n";
+            }
+            else {
+                field.classList.remove("err");
+                error.innerHTML = "";
+            }
+
+            //for phone
+            field = document.getElementById("phone");
+            error = document.getElementById("errorPhone");
+            var phone = document.forms['form']['phone'].value;
+            if (!field.checkValidity() || phone.length < 10) {
+                valid = false;
+                field.classList.add("err");
+                if (!field.checkValidity()) {
+                    error.innerHTML = "Please Enter Phone number!\r\n";
+                }
+                else if (password.length < 10) {
+                    error.innerHTML = "Phone number must be of minimum 10 digits!\r\n";
+                }
+            }
+            else {
+                field.classList.remove("err");
+                error.innerHTML = "";
+            }
+
+            //for password 
+            field = document.getElementById("password");
+            error = document.getElementById("errorPassword");
+            var password = document.forms['form']['password'].value;
+
+            if (!field.checkValidity() || password.length < 8) {
+                valid = false;
+                field.classList.add("err");
+                if (!field.checkValidity()) {
+                    error.innerHTML = "Please Enter a password!\r\n";
+                }
+                else if (password.length < 8) {
+                    error.innerHTML = "Password must be of minimum 8 characters!\r\n";
+                }
+            }
+            else {
+                field.classList.remove("err");
+                error.innerHTML = "";
+            }
+
+            return valid;
+        }
+    </script>
+</body>
+
+</html>
